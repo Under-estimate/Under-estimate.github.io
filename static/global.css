@@ -1,0 +1,11 @@
+.block{
+    border-radius: 25px;
+    background: #ffffff;
+    box-shadow:  22px 22px 44px #ababab, 
+                -22px -22px 44px #ffffff;
+    padding:25px;
+    margin-bottom:20px;
+}
+.hidden{
+    display:none;
+}

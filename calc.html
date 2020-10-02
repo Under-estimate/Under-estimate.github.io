@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="static/global.css"/>
+        <link rel="Shortcut Icon" href="https://s1.ax1x.com/2020/03/27/GPH9xO.png" type="image/png" />
+        <title>武汉大学综合素质测评辅助计算</title>
+    </head>
+    <body style="margin-top:20px;">
+        <div class="container" >
+        <h1>武汉大学综合素质测评辅助计算</h1>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <img src="static/svg/warning.svg"/>
+            <strong>注意:</strong>
+            本页面只用为辅助计算综合素质测评分数之工具，不会向任何人发送你输入的任何信息。
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">知道了</span>
+            </button>
+        </div>
+        <div class="block">
+        <h2>F1 - 基本素质测评分<span id="f1"></span></h2>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>提示:</strong>
+            如果您在校期间没有出现违纪现象，此项目一般为100分。
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">知道了</span>
+            </button>
+        </div>
+        <div class="hidden" role="alert" id="f1err">
+            <strong>错误:</strong>填写的分数超出范围[0,20]，请检查。
+        </div>
+        <hr />
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1" >A<sub>1</sub>思想政治表现(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">A<sub>2</sub>个人品德修养(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">A<sub>3</sub>学习态度状况(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a3" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">A<sub>4</sub>组织纪律观念(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a4" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">A<sub>5</sub>身体健康素质(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a5" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script>
+            function refreshF1(){
+                let sum=0;
+                for(let i=0;i<5;i++){
+                    let v=document.getElementById("a"+(i+1)).value;
+                    if(v===""){
+                        document.getElementById("f1").innerHTML="";
+                        document.getElementById("f1err").className="hidden";
+                        return;
+                    }
+                    if(v<0||v>20){
+                        document.getElementById("f1").innerHTML="";
+                        document.getElementById("f1err").className="alert alert-danger";
+                        return;
+                    }
+                    sum+=parseInt(v);
+                }
+                document.getElementById("f1err").className="hidden";
+                document.getElementById("f1").innerHTML="\t|\t您的分数为:"+sum;
+            }
+        </script>    
+    </div>
+    </body>
+</html>
