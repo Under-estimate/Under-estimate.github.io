@@ -794,8 +794,10 @@
                 refreshF();
             }
             function refreshF(){
-                if(ge("f1").innerText===""||ge("f2").innerText===""||ge("f3").innerText==="")
+                if(ge("f1").innerText===""||ge("f2").innerText===""||ge("f3").innerText===""){
+                    ge("f").innerHTML="";
                     return;
+                }
                 let sum=0;
                 sum+=parseFloat(ge("f1").innerText)*0.1;
                 sum+=parseFloat(ge("f2").innerText)*0.7;
