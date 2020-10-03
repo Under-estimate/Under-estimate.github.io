@@ -19,51 +19,412 @@
             <strong>注意:</strong>
             本页面只用为辅助计算综合素质测评分数之工具，不会向任何人发送你输入的任何信息。
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">知道了</span>
+            <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="block">
-        <h2>F1 - 基本素质测评分<span id="f1"></span></h2>
+            <h2>在开始之前，请确认您没有出现以下情况</h2>
+            <ol>
+                <li>违反四项基本原则，参与有损于祖国尊严、荣誉、利益和危害社会秩序活动。</li>
+                <li>考试舞弊受学校处分。</li>
+                <li>触犯国家法律，构成刑事犯罪被追究刑事责任者，或者违反校纪校规受到学校留校察看处分、记过处分、严重警告处分、警告处分者</li>
+                <li><strong>体育未达到《国家学生体质健康标准》及格并且不属于免测情况。</strong></li>
+            </ol>
+            出现以上情况的，一票否决，取消参评资格。
+        </div>
+        <div class="block">
+        <h2>F<sub>1</sub> - 基本素质测评分 (10%)</h2>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>提示:</strong>
             如果您在校期间没有出现违纪现象，此项目一般为100分。
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">知道了</span>
+            <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="hidden" role="alert" id="f1err">
             <strong>错误:</strong>填写的分数超出范围[0,20]，请检查。
         </div>
         <hr />
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>提示:</strong>
+            点击输入框标题可查看该项的描述信息。
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" >A<sub>1</sub>思想政治表现(20分)</sub></span>
+                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a1desc').className=''">A<sub>1</sub>思想政治表现(20分)</sub></span>
             </div>
             <input type="text" class="form-control" id="a1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
         </div>
+        <div id="a1desc" class="hidden">
+            <ol>
+            <li>热爱祖国，维护四项基本原则，拥护党的路线、方针、政策，不参与任何有损祖国尊严、荣誉、利益和危害社会秩序的活动。</li>
+            <li>政治上积极上进，自觉学习马列主义和中国特色社会主义理论，关心时事，积极参加各项政治学习和活动，自觉加强政治修养。</li>
+            <li>顾全大局，有团结协作精神，关心集体，积极参与各项集体活动，自觉维护集体荣誉，个人利益服从集体利益，不做损害集体利益和荣誉的事。</li>
+            </ol>
+            <button onclick="document.getElementById('a1desc').className='hidden'" class="btn btn-primary">收起</button>
+        </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">A<sub>2</sub>个人品德修养(20分)</sub></span>
+                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a2desc').className=''">A<sub>2</sub>个人品德修养(20分)</sub></span>
             </div>
             <input type="text" class="form-control" id="a2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
         </div>
+        <div id="a2desc" class="hidden">
+            <ol>
+            <li>自觉维护社会公德，在公共场所举止文雅，文明礼貌；爱护公物，敢于同不良行为作斗争。</li>
+            <li>诚实守信，谦虚谨慎，为人正直，办事公道；敬老爱幼，团结同学，乐于助人。。</li>
+            <li>热爱劳动，热心公益，文明卫生，爱护环境，不奢侈浪费。</li>
+            </ol>
+            <button onclick="document.getElementById('a2desc').className='hidden'" class="btn btn-primary">收起</button>
+        </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">A<sub>3</sub>学习态度状况(20分)</sub></span>
+                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a3desc').className=''">A<sub>3</sub>学习态度状况(20分)</sub></span>
             </div>
             <input type="text" class="form-control" id="a3" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">A<sub>4</sub>组织纪律观念(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a4" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        <div id="a3desc" class="hidden">
+            <ol>
+            <li>学风端正，学习目标明确，有科学的思想方法和严谨的治学精神；谦虚好学，刻苦认真，不迟到，不早退，不无故旷课。</li>
+            <li>考风良好，考试不舞弊。</li>
+            </ol>
+            <button onclick="document.getElementById('a3desc').className='hidden'" class="btn btn-primary">收起</button>
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">A<sub>5</sub>身体健康素质(20分)</sub></span>
+                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a4desc').className=''">A<sub>4</sub>组织纪律观念(20分)</sub></span>
+            </div>
+            <input type="text" class="form-control" id="a4" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div id="a4desc" class="hidden">
+            <ol>
+            <li>遵守国家法律法规和学校规章制度，自觉维护公共秩序，做到令行禁止。</li>
+            <li>不打架斗殴，不赌博，不酗酒，不观看、传播反动、淫秽书刊和声像制品。</li>
+            <li>遵守宿舍管理规定，按时熄灯就寝，不喧哗、打闹，不影响他人的正常学习和休息，不损毁宿舍设备，不违章使用电器，不留宿校外人员，未经审批不在校外住宿。</li>
+            </ol>
+            <button onclick="document.getElementById('a4desc').className='hidden'" class="btn btn-primary">收起</button>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a5desc').className=''">A<sub>5</sub>身体健康素质(20分)</sub></span>
             </div>
             <input type="text" class="form-control" id="a5" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+        </div>
+        <div id="a5desc" class="hidden">
+            <ol>
+            <li>有健康的体魄，自觉锻炼身体，积极参加课外体育锻炼和体育竞赛活动，体育达标成绩合格；认真参加并完成军训任务。</li>
+            <li>具有心理卫生的基本知识，有较强的适应能力和心理调节能力，能正确对待困难和挫折，情绪稳定，达观向上，人际关系和谐。 </li>
+            <li>积极参加有益的文化活动，增进身心健康。</li>
+            </ol>
+            <button onclick="document.getElementById('a5desc').className='hidden'" class="btn btn-primary">收起</button>
+        </div>
+        <hr />
+        <h3>以下为减分项，每大类最多减20分</h3>
+        <h4>思想政治方面</h4>
+        <label for="ad1">无正当理由不参加政治学习、班团会</label>
+        <div class="input-group mb-3">
+            <input id="ad1" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <h4>个人品德修养方面</h4>
+        <label for="ad2">不讲社会公德、故意损坏公物或破坏环境</label>
+        <div class="input-group mb-3">
+            <input id="ad2" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-4分/次</span>
+            </div>
+        </div>
+        <label for="ad3">因不负责任，不讲诚信，造成一定负面影响和不良后果</label>
+        <div class="input-group mb-3">
+            <input id="ad3" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-3分/次</span>
+            </div>
+        </div>
+        <label for="ad4">所在寝室在学院组织的寝室卫生评比中不合格（或差）</label>
+        <div class="input-group mb-3">
+            <input id="ad4" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <h4>学习态度方面</h4>
+        <label for="ad5">无故旷课</label>
+        <div class="input-group mb-3">
+            <input id="ad5" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <label for="ad6">上课迟到、早退</label>
+        <div class="input-group mb-3">
+            <input id="ad6" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-1分/次</span>
+            </div>
+        </div>
+        <label for="ad7">违反学习纪律、弄虚作假</label>
+        <div class="input-group mb-3">
+            <input id="ad7" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <label for="ad8">不按时完成学习任务</label>
+        <div class="input-group mb-3">
+            <input id="ad8" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-1分/次</span>
+            </div>
+        </div>
+        <h4>组织纪律观念方面</h4>
+        <label for="ad9">受到校、院通报批评</label>
+        <div class="input-group mb-3">
+            <input id="ad9" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-3分/次</span>
+            </div>
+        </div>
+        <label for="ad10">打架斗殴、参与赌博、酗酒、观看并传播反动、淫秽书刊和声像制品行为但不构成处分或通报批评</label>
+        <div class="input-group mb-3">
+            <input id="ad10" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <label for="ad11">不遵守学校宿舍管理规定行为</label>
+        <div class="input-group mb-3">
+            <input id="ad11" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <h4>身体健康素质方面</h4>
+        <label for="ad12">应参加军训而未完成军训任务</label>
+        <div class="input-group mb-3">
+            <select class="form-control" id="ad12" oninput="refreshF1();">
+                <option>否</option>
+                <option>是</option>
+              </select>
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-6分</span>
+            </div>
+        </div>
+        <label for="ad13">无正当理由不参加校学院（系）组织课外体育活动</label>
+        <div class="input-group mb-3">
+            <input id="ad13" type="text" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
+            <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">-2分/次</span>
+            </div>
+        </div>
+        <hr />
+        <h3>您的F1分数为：<span id="f1"></span></h3>
+        </div>
+        <div class="block">
+            <h2>F<sub>2</sub> - 课程学习成绩分</h2>
+            <div class="hidden" role="alert" id="f2err1">
+                <strong>错误:</strong>填写的成绩超出100，请检查。
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('b1desc').className=''">B<sub>1</sub>必修课程平均分</sub></span>
+                </div>
+                <input type="text" class="form-control" id="b1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            </div>
+        <div id="b1desc" class="hidden">
+            必修课程平均分计算方法为：(每门必修课课的学分&times;对应课程的成绩)/总必修学分。<br/>
+            如果您想要更快的计算出平均分，可以使用梦想珈的成绩计算器功能，在成绩单页面长按某一条成绩即可进入成绩计算器，其中的加权(必)即为必修课平均分。
+            <button onclick="document.getElementById('b1desc').className='hidden'" class="btn btn-primary">收起</button>
+        </div>
+        <h3>B<sub>2</sub>选修课程加分</h3>
+        选择您的选修课中(学分&times;成绩)值最高的选修课填入下表(最多8门选修课)。
+        <div class="hidden" role="alert" id="f2err2">
+            <strong>错误:</strong>填写的成绩超出100，请检查。
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">1</span>
+            </div>
+            <input type="text" class="form-control" id="b211" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b212" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">2</span>
+            </div>
+            <input type="text" class="form-control" id="b221" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b222" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">3</span>
+            </div>
+            <input type="text" class="form-control" id="b231" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b232" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">4</span>
+            </div>
+            <input type="text" class="form-control" id="b241" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b242" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">5</span>
+            </div>
+            <input type="text" class="form-control" id="b251" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b252" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">6</span>
+            </div>
+            <input type="text" class="form-control" id="b261" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b262" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">7</span>
+            </div>
+            <input type="text" class="form-control" id="b271" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b272" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">8</span>
+            </div>
+            <input type="text" class="form-control" id="b281" placeholder="学分" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+            <input type="text" class="form-control" id="b282" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
+        </div>
+        <hr />
+        <h3>您的F2分数为：<span id="f2"></span></h3>
+        </div>
+        <div class="block">
+            <h2>F<sub>3</sub>-实践与创新能力总评分</h2>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('c1desc').className=''">C<sub>1</sub>出版著作(&le;15分)</sub></span>
+                </div>
+                <input type="text" class="form-control" id="c1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF1();">
+            </div>
+            <div id="c1desc" class="hidden">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap">
+                        <thead>
+                            <th>&nbsp;</th>
+                            <th colspan="2">独(合)著</th>
+                            <th colspan="4">主(参)编</th>
+                        </thead>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>10万字以上</td>
+                            <td>10万字以下</td>
+                            <td>10万字以上</td>
+                            <td>5-10万字</td>
+                            <td>1-5万字</td>
+                            <td>1万字以下</td>
+                        </tr>
+                        <tr>
+                            <td>学术著作</td>
+                            <td>15</td>
+                            <td>3-10</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>文学、艺术等著作</td>
+                            <td>12</td>
+                            <td>2-8</td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</th>
+                        </tr>
+                    </table>
+                </div>
+                <button onclick="document.getElementById('c1desc').className='hidden'" class="btn btn-primary">收起</button>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('c2desc').className=''">C<sub>2</sub>发表作品(&le;20分)</sub></span>
+                </div>
+                <input type="text" class="form-control" id="c2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF1();">
+            </div>
+            <div id="c2desc" class="hidden">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap">
+                        <caption>发表学术论文评分</caption>
+                        <tr>
+                            <td rowspan="2">SCI、EI论文</td>
+                            <td>影响因子&ge;3</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>影响因子&lt;3</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">国家核心期刊</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">公开发行的学术刊物</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">ISTP论文</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">国际会议论文、全国会议论文</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">地区会议论文</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">合法的内部学术刊物</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap">
+                        <caption>发表文学、艺术、新闻等作品评分</caption>
+                        <tr>
+                            <td>国家级权威报刊或新闻媒体</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>省级重要报刊或新闻媒体</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>其它公开发行的报刊或地方新闻媒体，学校主办的公开发行的报刊</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>学校主办的其它报刊</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td>学院主办的内部刊物</td>
+                            <td>0.5</td>
+                        </tr>
+                    </table>
+                </div>
+                <button onclick="document.getElementById('c1desc').className='hidden'" class="btn btn-primary">收起</button>
+            </div>
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -71,26 +432,64 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <script>
+            function ge(id){
+                return document.getElementById(id);
+            }
+            function gi(id){
+                let v=ge(id);
+                if(v.value==="")
+                    return 0;
+                else
+                    return parseFloat(v.value);
+            }
             function refreshF1(){
                 let sum=0;
                 for(let i=0;i<5;i++){
-                    let v=document.getElementById("a"+(i+1)).value;
+                    let v=ge("a"+(i+1)).value;
                     if(v===""){
-                        document.getElementById("f1").innerHTML="";
-                        document.getElementById("f1err").className="hidden";
+                        ge("f1").innerHTML="";
+                        ge("f1err").className="hidden";
                         return;
                     }
-                    if(v<0||v>20){
-                        document.getElementById("f1").innerHTML="";
-                        document.getElementById("f1err").className="alert alert-danger";
+                    if(v>20){
+                        ge("f1").innerHTML="";
+                        ge("f1err").className="alert alert-danger";
                         return;
                     }
                     sum+=parseInt(v);
                 }
-                document.getElementById("f1err").className="hidden";
-                document.getElementById("f1").innerHTML="\t|\t您的分数为:"+sum;
+                sum-=Math.min(20,2*gi("ad1"));
+                sum-=Math.min(20,4*gi("ad2")+3*gi("ad3")+2*gi("ad4"));
+                sum-=Math.min(20,2*gi("ad5")+gi("ad6")+2*gi("ad7")+gi("ad8"));
+                sum-=Math.min(20,3*gi("ad9")+2*gi("ad10")+2*gi("ad11"));
+                sum-=Math.min(20,(ge("ad12").value==="是"?6:0)+2*gi("ad13"));
+                ge("f1err").className="hidden";
+                ge("f1").innerHTML=sum;
             }
-        </script>    
+            function refreshF2(){
+                if(ge("b1").value==="")
+                    return;
+                if(gi("b1")>100){
+                    ge("f2err1").className="alert alert-danger";
+                    ge("f2").innerHTML="";
+                    return;
+                }
+                ge("f2err1").className="hidden";
+                let sum=0;
+                for(let i=0;i<8;i++){
+                    let v1=gi("b2"+(i+1)+"1");
+                    let v2=gi("b2"+(i+1)+"2");
+                    if(v2>100){
+                        ge("f2").innerHTML="";
+                        ge("f2err2").className="alert alert-danger";
+                        return;
+                    }
+                    sum+=v1*v2;
+                }
+                ge("f2err2").className="hidden";
+                ge("f2").innerHTML=(sum*0.002+gi("b1")).toFixed(4);
+            }
+        </script>
     </div>
     </body>
 </html>
