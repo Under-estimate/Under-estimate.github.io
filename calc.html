@@ -801,7 +801,7 @@
                 let sum=0;
                 sum+=parseFloat(ge("f1").innerText)*0.1;
                 sum+=parseFloat(ge("f2").innerText)*0.7;
-                sum+=parseFloat(ge("f3").innerText)*0.2;
+                sum+=ge("f3").innerText===""?0:parseFloat(ge("f3").innerText)*0.2;
                 ge("f").innerHTML=sum.toFixed(4);
             }
         </script>
