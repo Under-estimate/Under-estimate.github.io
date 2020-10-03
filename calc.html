@@ -41,88 +41,6 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="hidden" role="alert" id="f1err">
-            <strong>错误:</strong>填写的分数超出范围[0,20]，请检查。
-        </div>
-        <hr />
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <strong>提示:</strong>
-            点击输入框标题可查看该项的描述信息。
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a1desc').className=''">A<sub>1</sub>思想政治表现(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
-        </div>
-        <div id="a1desc" class="hidden">
-            <ol>
-            <li>热爱祖国，维护四项基本原则，拥护党的路线、方针、政策，不参与任何有损祖国尊严、荣誉、利益和危害社会秩序的活动。</li>
-            <li>政治上积极上进，自觉学习马列主义和中国特色社会主义理论，关心时事，积极参加各项政治学习和活动，自觉加强政治修养。</li>
-            <li>顾全大局，有团结协作精神，关心集体，积极参与各项集体活动，自觉维护集体荣誉，个人利益服从集体利益，不做损害集体利益和荣誉的事。</li>
-            </ol>
-            <button onclick="document.getElementById('a1desc').className='hidden'" class="btn btn-primary">收起</button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a2desc').className=''">A<sub>2</sub>个人品德修养(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
-        </div>
-        <div id="a2desc" class="hidden">
-            <ol>
-            <li>自觉维护社会公德，在公共场所举止文雅，文明礼貌；爱护公物，敢于同不良行为作斗争。</li>
-            <li>诚实守信，谦虚谨慎，为人正直，办事公道；敬老爱幼，团结同学，乐于助人。。</li>
-            <li>热爱劳动，热心公益，文明卫生，爱护环境，不奢侈浪费。</li>
-            </ol>
-            <button onclick="document.getElementById('a2desc').className='hidden'" class="btn btn-primary">收起</button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a3desc').className=''">A<sub>3</sub>学习态度状况(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a3" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
-        </div>
-        <div id="a3desc" class="hidden">
-            <ol>
-            <li>学风端正，学习目标明确，有科学的思想方法和严谨的治学精神；谦虚好学，刻苦认真，不迟到，不早退，不无故旷课。</li>
-            <li>考风良好，考试不舞弊。</li>
-            </ol>
-            <button onclick="document.getElementById('a3desc').className='hidden'" class="btn btn-primary">收起</button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a4desc').className=''">A<sub>4</sub>组织纪律观念(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a4" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
-        </div>
-        <div id="a4desc" class="hidden">
-            <ol>
-            <li>遵守国家法律法规和学校规章制度，自觉维护公共秩序，做到令行禁止。</li>
-            <li>不打架斗殴，不赌博，不酗酒，不观看、传播反动、淫秽书刊和声像制品。</li>
-            <li>遵守宿舍管理规定，按时熄灯就寝，不喧哗、打闹，不影响他人的正常学习和休息，不损毁宿舍设备，不违章使用电器，不留宿校外人员，未经审批不在校外住宿。</li>
-            </ol>
-            <button onclick="document.getElementById('a4desc').className='hidden'" class="btn btn-primary">收起</button>
-        </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('a5desc').className=''">A<sub>5</sub>身体健康素质(20分)</sub></span>
-            </div>
-            <input type="text" class="form-control" id="a5" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d]/g,'');refreshF1();">
-        </div>
-        <div id="a5desc" class="hidden">
-            <ol>
-            <li>有健康的体魄，自觉锻炼身体，积极参加课外体育锻炼和体育竞赛活动，体育达标成绩合格；认真参加并完成军训任务。</li>
-            <li>具有心理卫生的基本知识，有较强的适应能力和心理调节能力，能正确对待困难和挫折，情绪稳定，达观向上，人际关系和谐。 </li>
-            <li>积极参加有益的文化活动，增进身心健康。</li>
-            </ol>
-            <button onclick="document.getElementById('a5desc').className='hidden'" class="btn btn-primary">收起</button>
-        </div>
-        <hr />
-        <h3>以下为减分项，每大类最多减20分</h3>
         <h4>思想政治方面</h4>
         <label for="ad1">无正当理由不参加政治学习、班团会</label>
         <div class="input-group mb-3">
@@ -223,23 +141,29 @@
             </div>
         </div>
         <hr />
-        <h3>您的F1分数为：<span id="f1"></span></h3>
+        <h3>您的F1分数为：<span id="f1">100</span></h3>
         </div>
         <div class="block">
-            <h2>F<sub>2</sub> - 课程学习成绩分</h2>
+            <h2>F<sub>2</sub> - 课程学习成绩分 (70%)</h2>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>提示:</strong>
+                单击输入框前的标题以显示该项目的说明。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="hidden" role="alert" id="f2err1">
                 <strong>错误:</strong>填写的成绩超出100，请检查。
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('b1desc').className=''">B<sub>1</sub>必修课程平均分</sub></span>
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#b1desc">B<sub>1</sub>必修课程平均分</sub></span>
                 </div>
                 <input type="text" class="form-control" id="b1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
             </div>
-        <div id="b1desc" class="hidden">
+        <div id="b1desc" class="collapse">
             必修课程平均分计算方法为：(每门必修课课的学分&times;对应课程的成绩)/总必修学分。<br/>
-            如果您想要更快的计算出平均分，可以使用梦想珈的成绩计算器功能，在成绩单页面长按某一条成绩即可进入成绩计算器，其中的加权(必)即为必修课平均分。
-            <button onclick="document.getElementById('b1desc').className='hidden'" class="btn btn-primary">收起</button>
+            如果您想要更快的计算出平均分，可以使用梦想珈的成绩计算器功能，在成绩单页面长按某一条成绩即可进入成绩计算器，其中的加权(必)即为必修课平均分。<br />
         </div>
         <h3>B<sub>2</sub>选修课程加分</h3>
         选择您的选修课中(学分&times;成绩)值最高的选修课填入下表(最多8门选修课)。
@@ -306,16 +230,23 @@
         <h3>您的F2分数为：<span id="f2"></span></h3>
         </div>
         <div class="block">
-            <h2>F<sub>3</sub>-实践与创新能力总评分</h2>
+            <h2>F<sub>3</sub>-实践与创新能力分 (20%)</h2>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>提示:</strong>
+                单击输入框前的标题以显示该项目的说明。<br />手机端可以左右滑动来查看长表格。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('c1desc').className=''">C<sub>1</sub>出版著作(&le;15分)</sub></span>
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#c1desc">C<sub>1</sub>出版著作(&le;15分)</span>
                 </div>
-                <input type="text" class="form-control" id="c1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF1();">
+                <input type="text" class="form-control" id="c1" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
             </div>
-            <div id="c1desc" class="hidden">
+            <div id="c1desc" class="collapse">
                 <div class="table-responsive">
-                    <table class="table table-bordered text-nowrap">
+                    <table class="table table-bordered table-sm text-nowrap">
                         <thead>
                             <th>&nbsp;</th>
                             <th colspan="2">独(合)著</th>
@@ -349,18 +280,18 @@
                             <td>2</th>
                         </tr>
                     </table>
+                    不同著作可累加计分，合著者按作者实际承担的工作量计分。
                 </div>
-                <button onclick="document.getElementById('c1desc').className='hidden'" class="btn btn-primary">收起</button>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" onclick="document.getElementById('c2desc').className=''">C<sub>2</sub>发表作品(&le;20分)</sub></span>
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#c2desc">C<sub>2</sub>发表作品(&le;20分)</span>
                 </div>
-                <input type="text" class="form-control" id="c2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF1();">
+                <input type="text" class="form-control" id="c2" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
             </div>
-            <div id="c2desc" class="hidden">
+            <div id="c2desc" class="collapse">
                 <div class="table-responsive">
-                    <table class="table table-bordered text-nowrap">
+                    <table class="table table-bordered table-sm text-nowrap">
                         <caption>发表学术论文评分</caption>
                         <tr>
                             <td rowspan="2">SCI、EI论文</td>
@@ -399,7 +330,7 @@
                 </div>
                 
                 <div class="table-responsive">
-                    <table class="table table-bordered text-nowrap">
+                    <table class="table table-bordered table-sm text-nowrap">
                         <caption>发表文学、艺术、新闻等作品评分</caption>
                         <tr>
                             <td>国家级权威报刊或新闻媒体</td>
@@ -423,8 +354,346 @@
                         </tr>
                     </table>
                 </div>
-                <button onclick="document.getElementById('c1desc').className='hidden'" class="btn btn-primary">收起</button>
+                所有论文或作品加分应有出版刊物，不同论文或作品按篇数累加计分，同一论文或作品被转载的按转载最高级刊物计分；集体合作学术论文的第一作者按相应项计满分；第二作者按相应项减半计分（指导导师为第一作者的，第二作者按满分计）；第三作者及以后，按相应项分值除以作者总数为最后得分(指导导师不计入作者数)。第一作者单位及成果完成地点应是武汉大学及其联合教育基地单位，否则减半计分。刊物级别由学院按国家和学校有关规定认定。
+                <br />
             </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;"data-toggle="collapse" data-target="#c3desc">C<sub>3</sub>科技成果/发明(&le;25分)</span>
+                </div>
+                <input type="text" class="form-control" id="c3" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
+            </div>
+            <div id="c3desc" class="collapse">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered text-nowrap">
+                        <caption>科研成果和科研发明评分</caption>
+                        <tr>
+                            <td rowspan="2" colspan="2">&nbsp;</td>
+                            <td rowspan="2">国家级</td>
+                            <td rowspan="2">省部级</td>
+                            <td rowspan="2">省级政府部门、市级</td>
+                            <td rowspan="2">校级</td>
+                            <td colspan="3">大学生科技活动</td>
+                        </tr>
+                        <tr>
+                            <td>全国性</td>
+                            <td>省市级</td>
+                            <td>校级</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">获奖等级</td>
+                            <td>一</td>
+                            <td>20</td>
+                            <td>12</td>
+                            <td>9</td>
+                            <td>7</td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>二</td>
+                            <td>18</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>6</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>三</td>
+                            <td>14</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">鉴定成果</td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">发明成果</td>
+                            <td colspan="7">获国家发明专利每项加10分</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered text-nowrap">
+                        <caption>大学生科研项目评分</caption>
+                        <tr>
+                            <td colspan="6">国家级</td>
+                            <td colspan="2">校级</td>
+                            <td colspan="2">院级</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">优秀</td>
+                            <td colspan="2">良好</td>
+                            <td colspan="2">合格</td>
+                            <td colspan="2">结题</td>
+                            <td colspan="2">结题</td>
+                        </tr>
+                        <tr>
+                            <td>负责人</td>
+                            <td>成员</td>
+                            <td>负责人</td>
+                            <td>成员</td>
+                            <td>负责人</td>
+                            <td>成员</td>
+                            <td>负责人</td>
+                            <td>成员</td>
+                            <td>负责人</td>
+                            <td>成员</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+                不同发明或不同大学生科研项目可累加计分<br/>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#c4desc">C<sub>4</sub>学科与文体竞赛(&le;15分)</span>
+                </div>
+                <input type="text" class="form-control" id="c4" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
+            </div>
+            <div id="c4desc" class="collapse">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-nowrap">
+                        <thead>
+                            <th>名次</th>
+                            <th>获奖等级</th>
+                            <th>国际竞赛</th>
+                            <th>全国竞赛</th>
+                            <th>省部(市)级竞赛</th>
+                            <th>校级竞赛</th>
+                            <th>学部级竞赛</th>
+                            <th>院级竞赛</th>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>一</td>
+                            <td>12</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>2-4</td>
+                            <td>二</td>
+                            <td>10</td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>1.5</td>
+                        </tr>
+                        <tr>
+                            <td>5-8</td>
+                            <td>三</td>
+                            <td>8</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>1.5</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">&nbsp;</td>
+                            <td>优秀奖</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td>参加比赛</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1.5</td>
+                            <td colspan="3">0</td>
+                        </tr>
+                    </table>
+                </div>
+                不同项目获奖可累加计分，同一项目获不同等级奖，只计最高分；团体竞赛获奖，对其中起主要作用者，按相应项计满分，起次要作用者，按相应项减半计分。参加校级及以上级别比赛项目需有证明（获奖需要有获奖证书，没有获奖但参加比赛需要有证明材料）<br/>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#c5desc">C<sub>5</sub>社会活动与社会工作(&le;20分)</span>
+                </div>
+                <input type="text" class="form-control" id="c5" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
+            </div>
+            <div id="c5desc" class="collapse">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-nowrap">
+                        <caption>社会活动评分</caption>
+                        <tr>
+                            <td rowspan="2" colspan="2">&nbsp;</td>
+                            <td colspan="2">国家级</td>
+                            <td colspan="2">省部(市)级</td>
+                            <td colspan="2">校级</td>
+                            <td rowspan="2">院级</td>
+                        </tr>
+                        <tr>
+                            <td>标兵级</td>
+                            <td>普通级</td> 
+                            <td>标兵级</td>
+                            <td>普通级</td> 
+                            <td>标兵级</td>
+                            <td>普通级</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">先进集体</td>
+                            <td>负责人</td>
+                            <td>10</td>
+                            <td>7</td>
+                            <td>7</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>成员</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>0.5</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">先进个人、积极分子</td>
+                            <td>8</td>
+                            <td>7</td>
+                            <td>6</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">撰写调查报告、实验报告获奖</td>
+                            <td colspan="2">7</td>
+                            <td colspan="2">5</td>
+                            <td colspan="2">3</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-nowrap">
+                        <caption>社会工作评分</caption>
+                        <tr>
+                            <td>校学生会主席、校学生社团指导中心主任；院本科生党总支学生副书记，院团委学生副书记，院学生会主席</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>校学生会、校学生社团指导中心、学工部、校团委直属学生组织主席团成员</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>校学生会、校学生社团指导中心、学工部、校团委直属学生组织内设部门部长；院本科党总支学生委员，学生党支部书记，院团委学生委员，院学生会主席团成员；年级团总支书记，年级学生会主席，毕业生委员会主席</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>校级学生社团会长；学生党支部支委，年级团总支副书记，年级学生会副主席，毕业生委员会副主席</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>校学生会、校学生社团指导中心、学工部、校团委直属学生组织内设部门副部长，校级学生社团副会长；院团委、院学生会内设部门部长，院级学生社团会长；团支部书记、班长</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>院团委、院学生会内设部门副部长，院级学生社团副会长；年级团总支、年级学生会内设部门部长</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>校学生会、校学生社团指导中心、学工部、校团委直属学生组织其他干部</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>团支部支委、班委会班委</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>校级学生社团其他干部；院团委、院学生会、院级学生社团其他干部</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+                受到学院（系）以上表彰的先进集体或先进个人（特别是各种协会、社团、网站所设奖项）级别需由相应学校主管单位出具加盖公章的书面认定书。<br />
+                撰写社会调查报告、社会实践报告获奖前两名作者按相应项计满分，其他作者按相应项减半计分，同一事迹获得表彰的按最高级别表彰计分，不累加计分。<br />
+                担任学生干部且任职一学期以上并履行工作职责的，由学生所在学院的测评小组核查后报学院审核，兼任多项职务的，按最高职务计分，不累加计分。<br/>
+                除“三好学生标兵”按标兵级加分，其余荣誉均按普通级加分<br />
+                对于“优秀班集体”与“优秀团支部”荣誉，班长和团支书按负责人计分，其他同学按成员计分<br />
+                “优秀学生”和“三好学生”均不予加分<br />
+                院团委通报表扬加1分，学生会通报表扬加0.5分<br />
+                积极参加社会志愿服务活动者，可向学院提出申请，由学院对有关志愿活动的程度进行认定，通过后，即可被认定为通报表扬。<br />
+                积极参与球队日常训练和球队比赛者，采用队长负责制的方式，可由队长向学院递送申请名单，通过后，即可被认定为通报表扬。<br />
+                “优秀学生会”负责人为当届主席团成员，成员为当届部长；“优秀组织奖”、“精神文明奖”、“阳光体育先进集体”负责人为部长、团长或者队长，副部长、部委、队员均为成员，均按校级普通级加分。<br />
+                学工部直属学生组织：自强网、校学生党支部副书记联席会；<br />
+                校团委直属学生组织：校青年志愿者协会、青年传媒（集团）、学生团委副书记联席会、大学生文化艺术协会、校大学生中国特色社会主义理论体系学习研究会、校青年发展咨询与服务中心、大学生创新实践中心、大学生艺术团、校团校秘书长联席会。<br />
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="cursor:pointer;" data-toggle="collapse" data-target="#c6desc">C<sub>6</sub>英语及计算机能力(&le;5分)</span>
+                </div>
+                <input type="text" class="form-control" id="c6" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF3();">
+            </div>
+            <div id="c6desc" class="collapse">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-nowrap">
+                        <thead>
+                            <th colspan="3">英语能力</th>
+                            <th colspan="3">计算机能力</th>
+                        </thead>
+                        <tr>
+                            <td>英语专业八级</td>
+                            <td>托福102分，雅思7.5及以上</td>
+                            <td>大学英语四六级通过</td>
+                            <td>四级</td>
+                            <td>三级</td>
+                            <td>一级市场</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>1</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <h3>您的F3分数为:<span id="f3"></span></h3>
+        </div>
+        <div class="block">
+            <h2>您的总评分数为:<span id="f"></span></h2>
         </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -443,28 +712,14 @@
                     return parseFloat(v.value);
             }
             function refreshF1(){
-                let sum=0;
-                for(let i=0;i<5;i++){
-                    let v=ge("a"+(i+1)).value;
-                    if(v===""){
-                        ge("f1").innerHTML="";
-                        ge("f1err").className="hidden";
-                        return;
-                    }
-                    if(v>20){
-                        ge("f1").innerHTML="";
-                        ge("f1err").className="alert alert-danger";
-                        return;
-                    }
-                    sum+=parseInt(v);
-                }
+                let sum=100;
                 sum-=Math.min(20,2*gi("ad1"));
                 sum-=Math.min(20,4*gi("ad2")+3*gi("ad3")+2*gi("ad4"));
                 sum-=Math.min(20,2*gi("ad5")+gi("ad6")+2*gi("ad7")+gi("ad8"));
                 sum-=Math.min(20,3*gi("ad9")+2*gi("ad10")+2*gi("ad11"));
                 sum-=Math.min(20,(ge("ad12").value==="是"?6:0)+2*gi("ad13"));
-                ge("f1err").className="hidden";
                 ge("f1").innerHTML=sum;
+                refreshF();
             }
             function refreshF2(){
                 if(ge("b1").value==="")
@@ -488,6 +743,27 @@
                 }
                 ge("f2err2").className="hidden";
                 ge("f2").innerHTML=(sum*0.002+gi("b1")).toFixed(4);
+                refreshF();
+            }
+            function refreshF3(){
+                let sum=0;
+                sum+=Math.min(15,gi("c1"));
+                sum+=Math.min(20,gi("c2"));
+                sum+=Math.min(25,gi("c3"));
+                sum+=Math.min(15,gi("c4"));
+                sum+=Math.min(20,gi("c5"));
+                sum+=Math.min(5,gi("c6"));
+                ge("f3").innerHTML=sum.toFixed(4);
+                refreshF();
+            }
+            function refreshF(){
+                if(ge("f1").innerText===""||ge("f2").innerText===""||ge("f3").innerText==="")
+                    return;
+                let sum=0;
+                sum+=parseFloat(ge("f1").innerText)*0.1;
+                sum+=parseFloat(ge("f2").innerText)*0.7;
+                sum+=parseFloat(ge("f3").innerText)*0.2;
+                ge("f").innerHTML=sum.toFixed(4);
             }
         </script>
     </div>
