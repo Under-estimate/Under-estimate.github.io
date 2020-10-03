@@ -23,12 +23,13 @@
             </button>
         </div>
         <div class="block">
-            <h2>在开始之前，请确认您没有出现以下情况</h2>
+            <h2>在开始之前，请确认您<strong>没有</strong>出现以下情况</h2>
             <ol>
                 <li>违反四项基本原则，参与有损于祖国尊严、荣誉、利益和危害社会秩序活动。</li>
                 <li>考试舞弊受学校处分。</li>
                 <li>触犯国家法律，构成刑事犯罪被追究刑事责任者，或者违反校纪校规受到学校留校察看处分、记过处分、严重警告处分、警告处分者</li>
                 <li><strong>体育未达到《国家学生体质健康标准》及格并且不属于免测情况。</strong></li>
+                <li><strong>必修课(包括专业必修和公共必修)有不及格的科目。</strong></li>
             </ol>
             出现以上情况的，一票否决，取消参评资格。
         </div>
@@ -41,6 +42,17 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>关于本项目在综合素质测评表上的填写方式</strong><br />
+            综合素质测评表上的P项目为基准分数100。<br />
+            综合素质测评表上的A<sub>11</sub>项目为加分，此项一般为0分，除非有见义勇为或市政府奖励等重大表彰。<br />
+            综合素质测评表上的A<sub>12</sub>项目为下面的减分项。
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <button class="btn btn-primary" data-toggle="collapse" data-target="#deduct">展开/收起此部分内容</button>
+        <div id="deduct" class="collapse">
         <h4>思想政治方面</h4>
         <label for="ad1">无正当理由不参加政治学习、班团会</label>
         <div class="input-group mb-3">
@@ -140,8 +152,9 @@
             <span class="input-group-text" id="basic-addon2">-2分/次</span>
             </div>
         </div>
+        </div>
         <hr />
-        <h3>您的F1分数为：<span id="f1">100</span></h3>
+        <h3>您的F<sub>1</sub>分数为：<span id="f1">100</span></h3>
         </div>
         <div class="block">
             <h2>F<sub>2</sub> - 课程学习成绩分 (70%)</h2>
@@ -163,7 +176,15 @@
             </div>
         <div id="b1desc" class="collapse">
             必修课程平均分计算方法为：(每门必修课课的学分&times;对应课程的成绩)/总必修学分。<br/>
+            一门课程是否为必修课以原始成绩单为准。<br />
             如果您想要更快的计算出平均分，可以使用梦想珈的成绩计算器功能，在成绩单页面长按某一条成绩即可进入成绩计算器，其中的加权(必)即为必修课平均分。<br />
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>注意:</strong>
+                使用梦想珈的成绩计算服务前，请务必刷新成绩单，以防有些课程出分但未被计算在内。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
         <h3>B<sub>2</sub>选修课程加分</h3>
         选择您的选修课中(学分&times;成绩)值最高的选修课填入下表(最多8门选修课)。
@@ -227,13 +248,20 @@
             <input type="text" class="form-control" id="b282" placeholder="成绩" aria-describedby="basic-addon1" oninput="value=value.replace(/[^\d\.]/g,'');refreshF2();">
         </div>
         <hr />
-        <h3>您的F2分数为：<span id="f2"></span></h3>
+        <h3>您的F<sub>2</sub>分数为：<span id="f2"></span></h3>
         </div>
         <div class="block">
             <h2>F<sub>3</sub>-实践与创新能力分 (20%)</h2>
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <strong>提示:</strong>
                 单击输入框前的标题以显示该项目的说明。<br />手机端可以左右滑动来查看长表格。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>注意:</strong>
+                此项目中的加分需要提供证明复印件或公示。
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -690,9 +718,16 @@
                 </div>
             </div>
             <hr />
-            <h3>您的F3分数为:<span id="f3"></span></h3>
+            <h3>您的F<sub>3</sub>分数为:<span id="f3"></span></h3>
         </div>
         <div class="block">
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>提示:</strong>
+                请将综合素质测评表中自评部分填写完成，然后打印出来，和F<sub>3</sub>中的有关证明(纸质)一起上交。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <h2>您的总评分数为:<span id="f"></span></h2>
         </div>
         <!-- Optional JavaScript -->
@@ -722,8 +757,10 @@
                 refreshF();
             }
             function refreshF2(){
-                if(ge("b1").value==="")
+                if(ge("b1").value===""){
+                    ge("f2").innerHTML="";
                     return;
+                }
                 if(gi("b1")>100){
                     ge("f2err1").className="alert alert-danger";
                     ge("f2").innerHTML="";
