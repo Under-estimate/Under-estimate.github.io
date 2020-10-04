@@ -22,6 +22,18 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div id="at" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <span id="time"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="block">
+            弘毅学堂2019级13班综合素质测评进度
+            <div class="progress">
+                <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+              </div>
+        </div>
         <div class="block">
             <h2>在开始之前，请确认您<strong>没有</strong>出现以下情况</h2>
             <ol>
@@ -32,6 +44,13 @@
                 <li><strong>必修课(包括专业必修和公共必修)有不及格的科目。</strong></li>
             </ol>
             出现以上情况的，一票否决，取消参评资格。
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>注意:</strong>
+                因为以上原因不能参评奖学金的，或自己放弃参评奖学金的同学，请在班长处确认放弃参评奖学金。
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
         <div class="block">
         <h2>F<sub>1</sub> - 基本素质测评分 (10%)</h2>
@@ -730,6 +749,8 @@
             </div>
             <h2>您的总评分数为:<span id="f"></span></h2>
         </div>
+        <iframe id="progtxt" frameborder="0" name="f1" width="100" height="100" src="https://justzis.rthe.net/prog.html" scrolling="no" crossorigin="anonymous"></iframe>
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -803,6 +824,22 @@
                 sum+=parseFloat(ge("f2").innerText)*0.7;
                 sum+=ge("f3").innerText===""?0:parseFloat(ge("f3").innerText)*0.2;
                 ge("f").innerHTML=sum.toFixed(4);
+            }
+            window.addEventListener("message",function(event){
+                let val=((100*parseInt(event.data))/34).toFixed(1)+"%";
+                ge("progress").style="width:"+val;
+                ge("progress").innerHTML=val;
+            });
+            window.onload=function(){
+                document.getElementById("progtxt").contentWindow.postMessage("fetch","*");
+                let d=new Date();
+                let t=6-d.getDate();
+                if(t>=0){
+                    ge("time").innerHTML="距离弘毅学堂2019级13班综合素质测评表收集结束还有"+t+"天。";
+                }else{
+                    ge("at").className="alert alert-danger alert-dismissible fade show"
+                    ge("time").innerHTML="弘毅学堂2019级13班综合素质测评表收集已截止。";
+                }
             }
         </script>
     </div>
