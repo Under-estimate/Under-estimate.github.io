@@ -29,7 +29,7 @@
             </button>
         </div>
         <div class="block">
-            弘毅学堂2019级13班综合素质测评进度
+            弘毅学堂2019级13班综合素质测评进度<span id="progerr">(获取失败，请使用非QQ、微信内置浏览器)</span>
             <div class="progress">
                 <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
               </div>
@@ -749,7 +749,7 @@
             </div>
             <h2>您的总评分数为:<span id="f"></span></h2>
         </div>
-        <iframe id="progtxt" frameborder="0" name="f1" width="100" height="100" src="https://justzis.rthe.net/prog.html" scrolling="no" crossorigin="anonymous"></iframe>
+        <iframe id="progtxt" frameborder="0" name="f1" width="0" height="0" src="https://justzis.rthe.net/prog.html" scrolling="no" crossorigin="anonymous"></iframe>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -826,6 +826,7 @@
                 ge("f").innerHTML=sum.toFixed(4);
             }
             window.addEventListener("message",function(event){
+                ge("progerr").innerHTML="";
                 let val=((100*parseInt(event.data))/34).toFixed(1)+"%";
                 ge("progress").style="width:"+val;
                 ge("progress").innerHTML=val;
