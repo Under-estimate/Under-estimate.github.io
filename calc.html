@@ -22,7 +22,8 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div id="at" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div id="at" class="alert alert-info alert-dismissible fade show" role="alert">
+            <img src="static/svg/clock.svg"/>
             <span id="time"></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -195,15 +196,7 @@
             </div>
         <div id="b1desc" class="collapse">
             必修课程平均分计算方法为：(每门必修课的学分&times;对应课程的成绩)/总必修学分。<br/>
-            一门课程是否为必修课以原始成绩单为准。<br />
-            如果您想要更快的计算出平均分，可以使用梦想珈的成绩计算器功能，在成绩单页面长按某一条成绩即可进入成绩计算器，其中的加权(必)即为必修课平均分。<br />
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>注意:</strong>
-                使用梦想珈的成绩计算服务前，请务必刷新成绩单，以防有些课程出分但未被计算在内。
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            一门课程是否为必修课以原始成绩单为准。
         </div>
         <h3>B<sub>2</sub>选修课程加分</h3>
         选择您的选修课中(学分&times;成绩)值最高的选修课填入下表(最多8门选修课)。
@@ -742,7 +735,7 @@
         <div class="block">
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <strong>提示:</strong>
-                请将综合素质测评表中自评部分填写完成，然后打印出来，和F<sub>3</sub>中的有关证明(纸质)一起上交。
+                请将综合素质测评表中自评部分填写完成，然后打印出来，和原始成绩单以及F<sub>3</sub>中的有关证明(纸质)一起上交。
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -831,17 +824,17 @@
                 ge("progress").style="width:"+val;
                 ge("progress").innerHTML=val;
             });
-            window.onload=function(){
+            window.setInterval(function(){
                 document.getElementById("progtxt").contentWindow.postMessage("fetch","*");
                 let d=new Date();
-                let t=6-d.getDate();
-                if(t>=0){
-                    ge("time").innerHTML="距离弘毅学堂2019级13班综合素质测评表收集结束还有"+t+"天。";
+                let str=(6-d.getDate())+"天"+(24-d.getHours()-1)+"时"+(60-d.getMinutes()-1)+"分"+(60-d.getSeconds()-1)+"秒";
+                if(d.getDate()<=6){
+                    ge("time").innerHTML="距离弘毅学堂2019级13班综合素质测评表收集结束还有"+str+"。";
                 }else{
                     ge("at").className="alert alert-danger alert-dismissible fade show"
                     ge("time").innerHTML="弘毅学堂2019级13班综合素质测评表收集已截止。";
                 }
-            }
+            },1000);
         </script>
     </div>
     </body>
