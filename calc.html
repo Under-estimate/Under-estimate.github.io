@@ -32,8 +32,10 @@
         <div class="block">
             弘毅学堂2019级13班综合素质测评进度<span id="progerr">(获取失败，请使用非QQ、微信内置浏览器)</span>
             <div class="progress">
-                <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
-              </div>
+                <div id="submit" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                <div id="proof" class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                <div id="collect" class="progress-bar progress-bar-striped bg-primary progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                </div>
         </div>
         <div class="block">
             <h2>在开始之前，请确认您<strong>没有</strong>出现以下情况</h2>
@@ -819,20 +821,32 @@
                 ge("f").innerHTML=sum.toFixed(4);
             }
             window.addEventListener("message",function(event){
+                console.log(event.data);
                 ge("progerr").innerHTML="";
-                let val=((100*parseInt(event.data))/34).toFixed(1)+"%";
-                ge("progress").style="width:"+val;
-                ge("progress").innerHTML=val;
+                let dts=event.data.split(":");
+                let val=((100*parseInt(dts[0]))/34).toFixed(1)+"%";
+                ge("collect").style="width:"+val;
+                ge("collect").innerHTML="已提交:"+val;
+                
+                val=((100*parseInt(dts[1]))/34).toFixed(1)+"%";
+                ge("proof").style="width:"+val;
+                ge("proof").innerHTML="审核中:"+val;
+                
+                val=((100*parseInt(dts[2]))/34).toFixed(1)+"%";
+                ge("submit").style="width:"+val;
+                ge("submit").innerHTML="已完成:"+val;
             });
-            window.setInterval(function(){
+            window.onload=function(){
                 document.getElementById("progtxt").contentWindow.postMessage("fetch","*");
+            }
+            window.setInterval(function(){
                 let d=new Date();
                 let str=(6-d.getDate())+"天"+(24-d.getHours()-1)+"时"+(60-d.getMinutes()-1)+"分"+(60-d.getSeconds()-1)+"秒";
                 if(d.getDate()<=6){
                     ge("time").innerHTML="距离弘毅学堂2019级13班综合素质测评表收集结束还有"+str+"。";
                 }else{
                     ge("at").className="alert alert-danger alert-dismissible fade show"
-                    ge("time").innerHTML="弘毅学堂2019级13班综合素质测评表收集已截止。";
+                    ge("time").innerHTML="弘毅学堂2019级13班综合素质测评表收集已截止，还未交综合素质测评表的同学请联系班长安排时间提交。";
                 }
             },1000);
         </script>
