@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en" style="height:100%;">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="static/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.1/dist/echarts.min.js"></script>
+    <title>Github 事件实时可视化</title>
+    <style>
+      .main {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .header {
+        display: flex;
+        background: linear-gradient(90deg, rgb(0, 120, 120), black);
+        align-items: center;
+        gap: 10px;
+      }
+      .ud {
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+        color: rgb(0, 200, 200);
+      }
+      .uds {
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+        color: rgb(0, 200, 200);
+        align-items: flex-start;
+      }
+      .mcard {
+        opacity: 1;
+        border-radius: 10px;
+        background: #000000;
+        border: 2px solid #00BBBB;
+        box-shadow:  9px 9px 18px #000000;
+        color: white;
+        padding: 10px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        transition: all 0.5s ease;
+      }
+      .mcard:hover {
+        border: 2px solid #00FFFF;
+        box-shadow:  9px 9px 18px #00AAAA;
+      }
+      .animatefadein {
+        animation: 0.5s ease 0s 1 normal forwards running fadein;
+      }
+      .animatemargin {
+        animation: 0.5s ease 0s 1 normal forwards running margin;
+      }
+      .events {
+        position: relative;
+        flex: 7 7 auto;
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        flex-direction: column;
+        overflow-y: hidden;
+        transition: all 1s ease;
+      }
+      .avatar {
+        border-radius: 10px;
+        width: 50px;
+        height: 50px;
+      }
+      .stime {
+        color: rgb(0, 200, 200);
+        font-size: small;
+        flex: 0 0 auto;
+        align-self: flex-start;
+      }
+      .desc {
+        color: darkgray;
+        flex: 1 1 auto;
+      }
+      a.tlink {
+        text-decoration: none;
+        transition: all 0.5s ease;
+        color: white;
+      }
+      a.tlink:hover {
+        color:rgb(0, 200, 200);
+        text-decoration: underline;
+      }
+      a.tlink:active {
+        color: rgb(0, 120, 120);
+        text-decoration: underline;
+      }
+
+      @keyframes margin {
+        0% {margin-top: 0px;}
+        100% {margin-top: 90px;}
+      }
+
+      @keyframes fadein {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+      }
+    </style>
+  </head>
+  <body style="height:100%; overflow: hidden;">
+    <div class="main" id="main">
+      <div class="header">
+        <span style="color: white;padding-left: 10px;"><span style="font-size: xx-large;">Github 实时事件可视化</span> <span style="color: rgb(0, 200, 200);">by 周敬森</span></span>
+        <div class="progress" style="flex: 1 1 auto;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 100%" id="prog"></div>
+        </div>
+        <div class="ud">
+          <span>Last poll: <span id="lastpoll">???</span></span>
+          <span>Next poll: <span id="nextpoll">???</span></span>
+          <span>Rate limit: <span id="usedrate">???</span>/<span id="allrate">???</span> (<span id="ratereset">???</span>)</span>
+        </div>
+        <div class="ud" style="color: white; align-items: flex-end;padding-right: 10px;">
+          <span>GMT <span id="gmt">0000-00-00 00:00:00</span></span>
+          <span>CST <span id="cst">0000-00-00 00:00:00</span></span>
+        </div>
+      </div>
+      <div style="flex: 1 1 auto;display: flex;">
+        <div class="events" id="events">
+        </div>
+        <div style="width: 300px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="background-color: rgb(0, 120, 120); flex: 0 0 auto; color: white; padding-left: 10px;">各类事件占比</div>
+          <div id="pie" style="height: 200px; width: 300px;"></div>
+          <div style="background-color: rgb(0, 120, 120); flex: 0 0 auto; color: white; padding-left: 10px;">各类事件发生次数变化</div>
+          <div id="stroke" style="height: 300px; width: 300px;"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let progress = 0
+      let incr = 1
+      let eventList = []
+      let lastpolltime = -1
+      let nextpolltime = -1
+      let rateresettime = -1
+
+      let strokeChart = undefined
+      let pieChart = undefined
+      let init = true
+
+      let strokeOption = {
+        xAxis: [{data: []}],
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {orient: "horizontal", bottom: 5, itemGap: 5, itemWidth: 15, itemHeight: 7, height: 15, width: 300, textStyle: {color: '#FFFFFF'}},
+        grid: [{ left: 25, right: 5, top: 5, bottom: 100}],
+        yAxis: [{type: "value"}],
+        series: [
+          {data: [], type: 'line', name: "评论Commit"}, //0
+          {data: [], type: 'line', name: "创建Branch/Tag"}, //1
+          {data: [], type: 'line', name: "删除Branch/Tag"}, //2
+          {data: [], type: 'line', name: "Fork"}, //3
+          {data: [], type: 'line', name: "Wiki"}, //4
+          {data: [], type: 'line', name: "Issue"}, //5
+          {data: [], type: 'line', name: "修改合作成员"}, //6
+          {data: [], type: 'line', name: "公开私有仓库"}, //7
+          {data: [], type: 'line', name: "PullRequest"}, //8
+          {data: [], type: 'line', name: "Push"}, //9
+          {data: [], type: 'line', name: "Release"}, //10
+          {data: [], type: 'line', name: "赞助"}, //11
+          {data: [], type: 'line', name: "Star"}, //12
+        ]
+      };
+
+      let pieOption = {
+        tooltip : {
+          trigger: "item"
+        },
+        series: [{
+          type: "pie",
+          data: [
+            {value: 0, name: "评论Commit"}, //0
+            {value: 0, name: "创建Branch/Tag"}, //1
+            {value: 0, name: "删除Branch/Tag"}, //2
+            {value: 0, name: "Fork"}, //3
+            {value: 0, name: "Wiki"}, //4
+            {value: 0, name: "Issue"}, //5
+            {value: 0, name: "修改合作成员"}, //6
+            {value: 0, name: "公开私有仓库"}, //7
+            {value: 0, name: "PullRequest"}, //8
+            {value: 0, name: "Push"}, //9
+            {value: 0, name: "Release"}, //10
+            {value: 0, name: "赞助"}, //11
+            {value: 0, name: "Star"} //12
+          ]
+        }]
+      }
+      window.onload = function() {
+        strokeChart = echarts.init(document.getElementById("stroke"), "dark")
+        pieChart = echarts.init(document.getElementById("pie"), "dark")
+        strokeChart.showLoading()
+        pieChart.showLoading()
+      }
+      window.setTimeout(function() {
+        progress += incr;
+        if(progress >= 70) incr = -1
+        if(progress <= 0) incr = 1
+        document.getElementById("main").style="background: linear-gradient(black, black, rgb(0, " + progress + "," + progress + "));"
+      }, 50)
+      window.setTimeout(getEvent, 5000)
+      window.setInterval(function() {
+        let d = new Date()
+        let time = d.getTime()
+        document.getElementById("cst").innerText = d.format("yyyy-MM-dd hh:mm:ss")
+        d = new Date(d.getTime() + d.getTimezoneOffset() * 60000)
+        document.getElementById("gmt").innerText = d.format("yyyy-MM-dd hh:mm:ss")
+
+        if(lastpolltime > 0 && nextpolltime > 0 && rateresettime > 0) {
+          document.getElementById("lastpoll").innerText = Math.round((time - lastpolltime) / 1000) + " sec ago"
+          document.getElementById("nextpoll").innerText = "in " + Math.round((nextpolltime - time) / 1000) + " sec"
+          document.getElementById("ratereset").innerText = "rst in " + Math.round((rateresettime - time) / 1000) + " sec"
+          document.getElementById("prog").style = "width: " + (100 * ((time - lastpolltime) / (nextpolltime - lastpolltime))) + "%;"
+        }
+
+        if(eventList.length >= 1) addEvent(eventList.pop())
+      }, 1000)
+      function getEvent() {
+        $.ajax({
+          method: "get",
+          headers: { 
+            "accept": "application/vnd.github.v3+json"
+          },
+          url: "https://api.github.com/events?per_page=60",
+          success: function(data, status, xhr) {
+            data.sort(function(a, b){ return a.created_at.localeCompare(b.created_at) })
+            for(let i in data) eventList.unshift(data[i])
+            let d = new Date()
+            rateresettime = parseInt(xhr.getResponseHeader("x-ratelimit-reset")) * 1000
+            document.getElementById("usedrate").innerText = xhr.getResponseHeader("x-ratelimit-used")
+            document.getElementById("allrate").innerText = xhr.getResponseHeader("x-ratelimit-limit")
+            let remain = parseInt(xhr.getResponseHeader("x-ratelimit-remaining"))
+            if(remain <= 0) {
+              alert("错误：当前数据请求次数已达上限，请求次数将在" + Math.round((rateresettime - new Date().getTime()) / 1000) + "秒后重置。")
+              return
+            }
+            lastpolltime = d.getTime()
+            let pollinterval = parseInt(xhr.getResponseHeader("x-poll-interval")) * 1000
+            nextpolltime = d.getTime() + pollinterval
+
+            d = new Date(d.getTime() - 5 * 60 * 1000)
+            strokeOption.xAxis[0].data.push(d.format("hh:mm"))
+            for(let i in strokeOption.series) strokeOption.series[i].data.push(0)
+            if(strokeOption.xAxis[0].data.length > 10) {
+              strokeOption.xAxis[0].data.shift()
+              for(let i in strokeOption.series) strokeOption.series[i].data.shift()
+
+            }
+
+            if(init) { 
+              init = false
+              strokeChart.hideLoading()
+              pieChart.hideLoading()
+            }
+
+            window.setTimeout(getEvent, pollinterval)
+          }, error: function(xhr, status, err) {
+            alert("数据请求失败（"+status+"）："+err)
+          }
+        })
+      }
+      function addEvent(evtobj) {
+        let ele = createCard(evtobj)
+        let evt = document.getElementById("events")
+        if(evt.childElementCount <= 0) {
+          window.setTimeout(function() {
+            evt.appendChild(ele)
+          }, 500)
+        } else {
+          let fc = evt.firstChild
+          fc.className = "mcard animatemargin"
+          window.setTimeout(function() {
+            fc.className = "mcard"
+            evt.insertBefore(ele, fc)
+          }, 500)
+        }
+        if(evt.childElementCount > 20) evt.removeChild(evt.lastChild)
+      }
+      function createCard(evt) {
+        let username = evt.actor.login
+        let displayname = evt.actor.display_login 
+        let avatar = evt.actor.avatar_url
+        let repo = evt.repo.name
+        
+        let userurl = "https://github.com/" + username
+        let repourl = "https://github.com/" + repo
+        let time = "GMT " + evt.created_at.replace("T", " ").replace("Z", "")
+        let card = "<img src=\"" + avatar + "\" class=avatar width=50px height=50px/>"
+        card += "<div class=uds>"
+        card += "<a href=\"" + userurl + "\" class=tlink target=_blank>" + displayname + "</a>"
+        card += "<span>" + username + "</span>"
+        card += "</div>"
+        card += "<img src=\"static/svg/arrow.svg\" class=avatar/>"
+        card += "<a href=\"" + repourl + "\" class=tlink target=_blank>" + repo + "</a>"
+        card += "<div class=desc>" + getEventDesc(evt) + "</div>"
+        card += "<span class=stime>" + time + "</span>"
+
+        let ele = document.createElement("div")
+        ele.className = "mcard animatefadein"
+        ele.innerHTML = card
+
+        return ele
+      }
+      function updateChart(evtno) {
+        let dt = strokeOption.series[evtno].data
+        dt[dt.length - 1]++
+        pieOption.series[0].data[evtno].value++
+        strokeChart.setOption(strokeOption)
+        pieChart.setOption(pieOption)
+      }
+      function getEventDesc(evt) {
+        let desc = undefined
+        switch(evt.type) {
+          case "CommitCommentEvent":
+            console.log(evt)
+            updateChart(0)
+            return "评论了一个Commit"
+          case "CreateEvent":
+            updateChart(1)
+            if(evt.payload.ref_type == "branch") return "创建了Branch:" + getBranchDesc(evt, evt.payload.ref)
+            else return "创建了Tag:" + evt.payload.ref
+          case "DeleteEvent":
+            updateChart(2)
+            if(evt.payload.ref_type == "branch") return "删除了Branch:" + getBranchDesc(evt, evt.payload.ref)
+            else return "删除了Tag:" + evt.payload.ref
+          case "ForkEvent":
+            updateChart(3)
+            return "创建了此仓库的Fork:<a href=\""+evt.payload.forkee.html_url+"\" class=tlink>" + evt.payload.forkee.full_name + "</a>"
+          case "GollumEvent":
+            updateChart(4)
+            return "更新了Wiki"
+          case "IssueCommentEvent":
+            updateChart(5)
+            desc = getIssueDesc(evt.payload.issue)
+            switch(evt.payload.action) {
+              case "created" : return "评论了Issue:" + desc
+              case "edited" : return "编辑了Issue:" + desc + "中的一个评论"
+              case "deleted" : return "从Issue:" + desc + "中删除了一个评论"
+            }
+          case "IssuesEvent":
+            updateChart(5)
+            desc = getIssueDesc(evt.payload.issue)
+            switch(evt.payload.action) {
+              case "opened" : return "创建了Issue:" + desc
+              case "closed" : return "关闭了Issue:" + desc
+              case "reopened" : return "重新开启了Issue:" + desc
+              default: return "编辑了Issue:" + desc
+            }
+          case "MemberEvent":
+            updateChart(6)
+            return "修改了合作成员"
+          case "PublicEvent":
+            updateChart(7)
+            return "将此仓库设为公共仓库"
+          case "PullRequestEvent":
+            updateChart(8)
+            desc = getPullReqDesc(evt.payload.pull_request)
+            switch(evt.payload.action) {
+              case "opened" : return "创建了PullRequest:" + desc
+              case "closed" : return "关闭了PullRequest:" + desc
+              case "reopened" : return "重新开启了PullRequest:" + desc
+              default: return "编辑了PullRequest:" + desc
+            }
+          case "PullRequestReviewEvent":
+            updateChart(8)
+            desc = getPullReqDesc(evt.payload.pull_request)
+            return "请求审核PullRequest:" + desc
+          case "PullRequestReviewCommentEvent":
+            updateChart(8)
+            desc = getPullReqDesc(evt.payload.pull_request)
+            return "评论了PullRequest:" + desc + "的审核结果"
+          case "PushEvent":
+            updateChart(9)
+            desc = evt.payload.ref.split("/")[2]
+            return "Push了" + evt.payload.size + "个Commit到Branch:" + getBranchDesc(evt, desc)
+          case "ReleaseEvent":
+            updateChart(10)
+            desc = getReleaseDesc(evt.payload.release)
+            return "公布了Release:" + desc
+          case "SponsorshipEvent":
+            updateChart(11)
+            console.log(evt)
+            return "更新了赞助人信息"
+          case "WatchEvent":
+            updateChart(12)
+            return "关注了此仓库"
+        }
+      }
+      function getIssueDesc(issue) {
+        return "<a href=\"" + issue.html_url + "\" class=tlink target=_blank>" + issue.title + "</a>"
+      }
+      function getPullReqDesc(pr) {
+        return "<a href=\"" + pr.html_url + "\" class=tlink target=_blank>" + pr.title + "</a>"
+      } 
+      function getReleaseDesc(release) {
+        return "<a href=\"" + release.html_url + "\" class=tlink target=_blank>" + release.name + "</a>"
+      }
+      function getBranchDesc(evt, brn) {
+        return "<a href=\"https://github.com/" + evt.repo.name + "/tree/" + brn + "\" class=tlink target=_blank>" + brn + "</a>"
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
