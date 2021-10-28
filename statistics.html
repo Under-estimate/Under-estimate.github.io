@@ -333,7 +333,7 @@
             else return "删除了Tag:" + evt.payload.ref
           case "ForkEvent":
             updateChart(3)
-            return "创建了此仓库的Fork:<a href=\""+evt.payload.forkee.html_url+"\" class=tlink>" + evt.payload.forkee.full_name + "</a>"
+            return "创建了此仓库的Fork:<a href=\""+evt.payload.forkee.html_url+"\" class=tlink target=_blank>" + evt.payload.forkee.full_name + "</a>"
           case "GollumEvent":
             updateChart(4)
             return "更新了Wiki"
