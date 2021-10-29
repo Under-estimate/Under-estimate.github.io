@@ -249,7 +249,7 @@
             d = new Date(d.getTime() - 5 * 60 * 1000)
             strokeOption.xAxis[0].data.push(d.format("hh:mm"))
             for(let i in strokeOption.series) strokeOption.series[i].data.push(0)
-            if(strokeOption.xAxis[0].data.length > 10) {
+            if(strokeOption.xAxis[0].data.length > 60) {
               strokeOption.xAxis[0].data.shift()
               for(let i in strokeOption.series) strokeOption.series[i].data.shift()
 
