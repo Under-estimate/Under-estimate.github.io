@@ -1,0 +1,74 @@
+{
+    "SMTP": [
+        {
+            "date": "2022/2/5",
+            "version": "v0.0.1",
+            "url": "https://github.com/Under-estimate/msc-mail-server/tree/2f1b031465ea45871f58f5a8568eac5c3ffdeb3d/SMTP",
+            "evaluation": [
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "静态检查: 8个问题"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第56行: <div><kbd>if row[1] == self.client_pass:</kbd></div>为了安全起见，数据库中保存的不是用户的明文密码，而是单向加密之后的结果。目前可以假设密码<kbd>P</kbd>是经过MD5加密的，即数据库中存储的是<kbd>MD5(P)</kbd>，若客户端发送的密码经base64解密后为<kbd>P'</kbd>，则应比较<kbd>MD5(P')</kbd>和<kbd>MD5(P)</kbd>是否一致"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第50行,第65行: <div><kbd>sql = \"INSERT INTO MAILS(sender,receiver,create_time,content) VALUES ('\" + self.sender_addr + \"', '\" + receiver_addr + \"', now(), '\" + self.content + \"')\"</kbd></div>不能使用字符串拼接的方法构建SQL命令，会有<a href='http://c.biancheng.net/view/8283.html'>SQL注入</a>的风险。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第65行: <div><kbd>sql = \"INSERT INTO MAILS(sender,receiver,create_time,content) VALUES ('\" + self.sender_addr + \"', '\" + receiver_addr + \"', now(), '\" + self.content + \"')\"</kbd></div>没有插入uid值，uid值可以通过SQL函数<kbd>UUID()</kbd>产生。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第132行,第141行: <div><kbd>250-AUTH LOGIN PLAIN XOAUTH XOAUTH2</kbd></div>本次SMTP服务器仅实现了AUTH LOGIN方式，其他身份认证方式未实现。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第130行,第139行: <div><kbd>250-SIZE 1024</kbd></div>1024B的邮件大小过小。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第174行: <div><kbd>self.receiver_list.append(self.data[9:-1])</kbd></div>没有检查收件账户是否存在。若收件人为本服务器的用户，则应检查收件人账户是否存在。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第183行: <div><kbd>self.content = self.recv_endswith(\"\\r\\n.\\r\\n\").strip()</kbd></div>没有检查邮件大小是否符合限制。"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第199行: <div><kbd>HOST, PORT = \"127.0.0.1\", 8000</kbd></div>端口号不符合SMTP规范，应为25端口。"
+                },
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "代码执行: 服务器能够正常启动"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "基本邮件发送测试: 未通过"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "发送EHLO命令时出错，客户端发送EHLO test.com后服务端断开了连接<br>服务端打印输出内容:<codearea>EHLO<br>----------------------------------------<br>Exception&nbsp;happened&nbsp;during&nbsp;processing&nbsp;of&nbsp;request&nbsp;from&nbsp;('127.0.0.1',&nbsp;55919)<br>Traceback&nbsp;(most&nbsp;recent&nbsp;call&nbsp;last):<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;650,&nbsp;in&nbsp;process_request_thread<br>&nbsp;&nbsp;&nbsp;&nbsp;self.finish_request(request,&nbsp;client_address)<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;360,&nbsp;in&nbsp;finish_request<br>&nbsp;&nbsp;&nbsp;&nbsp;self.RequestHandlerClass(request,&nbsp;client_address,&nbsp;self)<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;720,&nbsp;in&nbsp;__init__<br>&nbsp;&nbsp;&nbsp;&nbsp;self.handle()<br>&nbsp;&nbsp;File&nbsp;\"server.py\",&nbsp;line&nbsp;137,&nbsp;in&nbsp;handle<br>&nbsp;&nbsp;&nbsp;&nbsp;self.request.sendall('''250-imagine.msc.com<br>TypeError:&nbsp;a&nbsp;bytes-like&nbsp;object&nbsp;is&nbsp;required,&nbsp;not&nbsp;'str'<br>----------------------------------------</codearea>"
+                }
+            ]
+        }
+    ],
+    "POP3": [
+
+    ]
+}
