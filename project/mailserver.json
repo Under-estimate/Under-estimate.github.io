@@ -66,6 +66,53 @@
                     "description": "发送EHLO命令时出错，客户端发送EHLO test.com后服务端断开了连接<br>服务端打印输出内容:<codearea>EHLO<br>----------------------------------------<br>Exception&nbsp;happened&nbsp;during&nbsp;processing&nbsp;of&nbsp;request&nbsp;from&nbsp;('127.0.0.1',&nbsp;55919)<br>Traceback&nbsp;(most&nbsp;recent&nbsp;call&nbsp;last):<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;650,&nbsp;in&nbsp;process_request_thread<br>&nbsp;&nbsp;&nbsp;&nbsp;self.finish_request(request,&nbsp;client_address)<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;360,&nbsp;in&nbsp;finish_request<br>&nbsp;&nbsp;&nbsp;&nbsp;self.RequestHandlerClass(request,&nbsp;client_address,&nbsp;self)<br>&nbsp;&nbsp;File&nbsp;\"D:\\Program&nbsp;Files\\Python\\lib\\socketserver.py\",&nbsp;line&nbsp;720,&nbsp;in&nbsp;__init__<br>&nbsp;&nbsp;&nbsp;&nbsp;self.handle()<br>&nbsp;&nbsp;File&nbsp;\"server.py\",&nbsp;line&nbsp;137,&nbsp;in&nbsp;handle<br>&nbsp;&nbsp;&nbsp;&nbsp;self.request.sendall('''250-imagine.msc.com<br>TypeError:&nbsp;a&nbsp;bytes-like&nbsp;object&nbsp;is&nbsp;required,&nbsp;not&nbsp;'str'<br>----------------------------------------</codearea>"
                 }
             ]
+        },
+        {
+            "date": "2022/2/6",
+            "version": "v0.0.2",
+            "url": "https://github.com/Under-estimate/msc-mail-server/tree/f8cea5f529cc12f748c146ea816e6e3601f6035b/SMTP",
+            "evaluation": [
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "静态检查: 1个问题"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "第73行: <div><kbd>data_tuple = (self.client_name,)</kbd></div>考虑到用户数据表与其他项目的兼容性，用户表中的用户名不带@msc.com后缀"
+                },
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "代码执行: 服务器能够正常启动"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "基本邮件发送测试: 邮件成功保存到数据库，1个问题"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "根据<a href='https://datatracker.ietf.org/doc/html/rfc821/'>SMTP规范</a>，每个服务器在收到邮件后，需要在邮件正文之前追加<codearea>Received : from [邮件来源域名，即EHLO的参数] by [本服务器域名] for [收件人，例如&lt;abc@msc.com&gt;] ; [时间戳，格式为Thu, 20 Jan 2022 14:14:32 -0500，最后一个是时区标识]</codearea>"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "错误命令测试: 2个问题"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "某些情况下返回的状态码和消息不规范，如当用户登录失败和邮箱不存在时均返回<div><kbd>502 unable to fetch data</kbd></div>但是502实际上是命令未实现的错误代码<br>详细的状态码意义可以参照<a href='https://datatracker.ietf.org/doc/html/rfc821/'>SMTP规范</a>和<a href='https://datatracker.ietf.org/doc/html/rfc2554'>SMTP身份认证扩展规范</a>，错误消息要尽量准确描述出现的问题，方便使用真实客户端测试时调试。<br><img src='../static/image/smtpCode1.jpg' /><br><img src='../static/image/smtpCode2.jpg' />"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "根据<a href='https://datatracker.ietf.org/doc/html/rfc821/'>SMTP规范</a>，当前的服务端仍需实现两个命令<br>NOOP:不执行任何动作并返回250状态码<br>RSET:重置当前会话，并放弃所有之前做过的操作，包括通过DATA命令提交的邮件。因此DATA命令结束后邮件不应立刻存储到数据库或转发，而是要等到当前连接断开。<br><img src='../static/image/smtpMinimum.jpg' />"
+                }
+            ]
         }
     ],
     "POP3": [

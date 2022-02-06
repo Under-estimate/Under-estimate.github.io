@@ -103,7 +103,7 @@
                 let ele = document.createElement("button")
                 ele.className = "version"
                 ele.innerHTML = smtp[i].date + "<br>" + smtp[i].version
-                ele.onclick = function() { loadDescription(i) }
+                ele.onclick = Function(`loadDescription(${i})`)
                 versions.appendChild(ele)
             }
         }
