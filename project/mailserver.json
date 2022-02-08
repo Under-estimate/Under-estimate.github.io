@@ -113,6 +113,43 @@
                     "description": "根据<a href='https://datatracker.ietf.org/doc/html/rfc821/'>SMTP规范</a>，当前的服务端仍需实现两个命令<br>NOOP:不执行任何动作并返回250状态码<br>RSET:重置当前会话，并放弃所有之前做过的操作，包括通过DATA命令提交的邮件。因此DATA命令结束后邮件不应立刻存储到数据库或转发，而是要等到当前连接断开。<br><img src='../static/image/smtpMinimum.jpg' />"
                 }
             ]
+        },
+        {
+            "date": "2022/2/8",
+            "version": "v0.0.3",
+            "url": "https://github.com/Under-estimate/msc-mail-server/tree/3a28c87d0540decdb0c6f6be863d498dffb210e1/SMTP",
+            "evaluation": [
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "静态检查: 没有问题"
+                },
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "代码执行: 服务器能够正常启动"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "系统测试: 7/13个测试未通过"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "BadAuthenticationParameterTest:&nbsp;AUTH&nbsp;LOGIN&nbsp;时发送任意字符串<br>服务端报错并关闭了连接：<codearea>----------------------------------------<br>Exception&nbsp;happened&nbsp;during&nbsp;processing&nbsp;of&nbsp;request&nbsp;from&nbsp;('127.0.0.1',&nbsp;52005)<br>Traceback&nbsp;(most&nbsp;recent&nbsp;call&nbsp;last):<br>&nbsp;&nbsp;File&nbsp;&quot;D:&#92;Program&nbsp;Files&#92;Python&#92;lib&#92;socketserver.py&quot;,&nbsp;line&nbsp;650,&nbsp;in&nbsp;process_request_thread<br>&nbsp;&nbsp;&nbsp;&nbsp;self.finish_request(request,&nbsp;client_address)<br>&nbsp;&nbsp;File&nbsp;&quot;D:&#92;Program&nbsp;Files&#92;Python&#92;lib&#92;socketserver.py&quot;,&nbsp;line&nbsp;360,&nbsp;in&nbsp;finish_request<br>&nbsp;&nbsp;&nbsp;&nbsp;self.RequestHandlerClass(request,&nbsp;client_address,&nbsp;self)<br>&nbsp;&nbsp;File&nbsp;&quot;D:&#92;Program&nbsp;Files&#92;Python&#92;lib&#92;socketserver.py&quot;,&nbsp;line&nbsp;720,&nbsp;in&nbsp;__init__<br>&nbsp;&nbsp;&nbsp;&nbsp;self.handle()<br>&nbsp;&nbsp;File&nbsp;&quot;D:&#92;Projects&#92;Java&nbsp;WEB&#92;MSC&nbsp;Mail&nbsp;Server&nbsp;Evaluation&#92;server.py&quot;,&nbsp;line&nbsp;234,&nbsp;in&nbsp;handle<br>&nbsp;&nbsp;&nbsp;&nbsp;self.client_name&nbsp;=&nbsp;base64.b64decode(self.data).decode(&quot;utf-8&quot;)<br>&nbsp;&nbsp;File&nbsp;&quot;D:&#92;Program&nbsp;Files&#92;Python&#92;lib&#92;base64.py&quot;,&nbsp;line&nbsp;87,&nbsp;in&nbsp;b64decode<br>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;binascii.a2b_base64(s)<br>binascii.Error:&nbsp;Incorrect&nbsp;padding<br>----------------------------------------</codearea>"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "BadCommandParameterTest:&nbsp;RCPT&nbsp;TO&nbsp;命令发送格式错误的邮箱<br>服务端返回的信息不正确：<br>[Client]&nbsp;RCPT&nbsp;TO:<@Epiphany!><br>[Server]&nbsp;551&nbsp;User&nbsp;not&nbsp;exist;&nbsp;please&nbsp;try&nbsp;again"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "(5个测试)：身份认证失败<br>[Client]&nbsp;AUTH&nbsp;LOGIN<br>[Server]&nbsp;334&nbsp;VXNlcm5hbWU6<br>[Client]&nbsp;WlJuUUBtc2MuY29t<br>[Server]&nbsp;334&nbsp;UGFzc3dvcmQ6<br>[Client]&nbsp;MTIzNDU2<br>[Server]&nbsp;535&nbsp;Login&nbsp;Fail.&nbsp;Please&nbsp;enter&nbsp;right&nbsp;information&nbsp;to&nbsp;login.<br>数据库内用户信息：<codearea>+--------------+----------------------------------+<br>|&nbsp;username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>+--------------+----------------------------------+<br>|&nbsp;ZRnQ@msc.com&nbsp;|&nbsp;e10adc3949ba59abbe56e057f20f883e&nbsp;|<br>+--------------+----------------------------------+</codearea>"
+                }
+            ]
         }
     ],
     "POP3": [
