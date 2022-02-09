@@ -143,11 +143,48 @@
                     "type": "text",
                     "status": "failed",
                     "description": "BadCommandParameterTest:&nbsp;RCPT&nbsp;TO&nbsp;命令发送格式错误的邮箱<br>服务端返回的信息不正确：<br>[Client]&nbsp;RCPT&nbsp;TO:<@Epiphany!><br>[Server]&nbsp;551&nbsp;User&nbsp;not&nbsp;exist;&nbsp;please&nbsp;try&nbsp;again"
+                }
+            ]
+        },
+        {
+            "date": "2022/2/9",
+            "version": "v0.0.4",
+            "url": "https://github.com/Under-estimate/msc-mail-server/tree/c8a43253e67508be7beab824939e25f409007185/SMTP",
+            "evaluation": [
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "静态检查: 没有问题"
+                },
+                {
+                    "type": "entry",
+                    "status": "success",
+                    "description": "代码执行: 服务器能够正常启动"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "系统测试: 2/14个测试未通过"
                 },
                 {
                     "type": "text",
                     "status": "failed",
-                    "description": "(5个测试)：身份认证失败<br>[Client]&nbsp;AUTH&nbsp;LOGIN<br>[Server]&nbsp;334&nbsp;VXNlcm5hbWU6<br>[Client]&nbsp;WlJuUUBtc2MuY29t<br>[Server]&nbsp;334&nbsp;UGFzc3dvcmQ6<br>[Client]&nbsp;MTIzNDU2<br>[Server]&nbsp;535&nbsp;Login&nbsp;Fail.&nbsp;Please&nbsp;enter&nbsp;right&nbsp;information&nbsp;to&nbsp;login.<br>数据库内用户信息：<codearea>+--------------+----------------------------------+<br>|&nbsp;username&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>+--------------+----------------------------------+<br>|&nbsp;ZRnQ@msc.com&nbsp;|&nbsp;e10adc3949ba59abbe56e057f20f883e&nbsp;|<br>+--------------+----------------------------------+</codearea>"
+                    "description": "ForwardTest：RCPT&nbsp;TO命令参数为非本服务器的邮箱地址时返回错误<br>[Cilent]&nbsp;RCPT&nbsp;TO:<123@test.com><br>[Server]&nbsp;503&nbsp;the&nbsp;receiver&nbsp;is&nbsp;invalid"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "ConnectionResetTest：若在服务端接收到QUIT命令之前，客户端断开了连接，按照SMTP规范应当视为RSET命令被执行，即放弃已作的更改。<br><img src='../static/image/quitDefinition.jpg' />"
+                },
+                {
+                    "type": "entry",
+                    "status": "failed",
+                    "description": "Python标准SMTP客户端测试：EHLO阶段失败"
+                },
+                {
+                    "type": "text",
+                    "status": "failed",
+                    "description": "通信捕获：<br>[Server]&nbsp;220&nbsp;welcome&nbsp;,i&quot;m&nbsp;here<br>[Client]&nbsp;ehlo&nbsp;[192.168.224.1]<br>[Server]&nbsp;502&nbsp;Invalid&nbsp;domain,getaddrinfo&nbsp;failed<br>[Client]&nbsp;helo&nbsp;[192.168.224.1]<br>[Server]&nbsp;502&nbsp;Invalid&nbsp;input&nbsp;from&nbsp;127.0.0.1&nbsp;to&nbsp;msc.com<br>错误原因：<br>SMTP&nbsp;EHLO命令定义中，除了域名可以作参数之外，还可以使用IP地址作为参数。<br><img src='../static/image/ehloDefinition.jpg' /><br>目前可以先支持IPv4和IPv6两种地址格式，若客户端使用IP地址作为EHLO参数，可以视为域名验证未通过。<br><img src='../static/image/addressLiteral.jpg' />"
                 }
             ]
         }
