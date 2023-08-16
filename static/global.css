@@ -6,6 +6,15 @@
     padding:25px;
     margin-bottom:20px;
 }
+.block.starrail {
+    background-image: url('image/starrail.png');
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+}
+.block.starrail>div{
+    padding:25px;
+}
 .hidden{
     display:none;
 }
